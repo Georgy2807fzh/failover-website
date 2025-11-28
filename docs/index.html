@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отказоустойчивый веб-сайт (/docs version)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Демонстрация отказоустойчивой архитектуры</h1>
+        <div class="version-badge">Версия: /docs folder</div>
+        <div class="status-card">
+            <h2>Текущий хост: <span id="current-host" class="host-name">Определяется...</span></h2>
+            <p class="timestamp" id="timestamp"></p>
+        </div>
+        <div class="info">
+            <div class="info-item primary">
+                <h3>🌐 Основной хост</h3>
+                <p>GitHub Pages (/docs)</p>
+                <div class="status-indicator active"></div>
+            </div>
+            <div class="info-item backup">
+                <h3>🛡️ Резервный хост</h3>
+                <p>Netlify</p>
+                <div class="status-indicator standby"></div>
+            </div>
+        </div>
+        <div class="architecture">
+            <h3>📊 Архитектура решения:</h3>
+            <pre>
+Пользователь → Cloudflare → /docs на GitHub Pages
+                            ↓
+                     Netlify (резерв)
+            </pre>
+        </div>
+    </div>
+    
+    <script>
+        const hostElement = document.getElementById('current-host');
+        const timestampElement = document.getElementById('timestamp');
+        
+        const hostname = window.location.hostname;
+        hostElement.textContent = hostname;
+        
+        if (hostname.includes('netlify')) {
+            hostElement.classList.add('backup-host');
+            document.title += ' [РЕЗЕРВНЫЙ]';
+        } else {
+            hostElement.classList.add('primary-host');
+        }
+        
+        timestampElement.textContent = 'Время загрузки: ' + new Date().toLocaleString('ru-RU');
+        
+        // Добавляем информацию о структуре
+        console.log('🚀 Сайт размещен в папке /docs');
+        console.log('📁 Структура проекта:');
+        console.log('- /docs/index.html');
+        console.log('- /docs/style.css');
+        console.log('- /src/ (для исходного кода)');
+        console.log('- /README.md');
+    </script>
+</body>
+</html>
